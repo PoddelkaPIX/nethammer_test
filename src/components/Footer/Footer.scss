@@ -1,0 +1,11 @@
+footer{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-top: 1px solid rgb(209, 209, 209);
+    align-items: center;
+    .select-limit{
+        width: 220px;
+        white-space: nowrap
+    }
+}

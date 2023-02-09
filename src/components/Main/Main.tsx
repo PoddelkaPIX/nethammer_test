@@ -15,7 +15,7 @@ type Row = TableRow & {
 const columns: TableColumn<Row>[] = [
   {
     title: 'Номер',
-    width: 80, 
+    width: 70, 
     accessor: 'id',
     align: 'left',
     sortable: true,
@@ -27,7 +27,7 @@ const columns: TableColumn<Row>[] = [
     sortable: true,
   },
   {
-    width: 200,
+    width: 160,
     title: 'Статус',
     accessor: 'completed',
     align: 'left',
@@ -46,11 +46,12 @@ export const Main: FC = () => {
     const {data} = todoApi.useGetTodosQuery({limit, skip: todos.length}, {
         skip: loading === false
     })
-     
+    
+    // Обновление таблицы
     useEffect(()=>{
         let newRows: Row[] = []
         for (let todo of todos){
-          if (todo.todo.toLowerCase().indexOf(filter.toLowerCase()) >= 0 ||  filter === ""){
+          if (todo.todo.toLowerCase().indexOf(filter.toLowerCase()) >= 0 ||  filter === ""){ // Фильтрация
             newRows.push({
               id: String(todo.id),
               todo: todo.todo,
@@ -76,13 +77,10 @@ export const Main: FC = () => {
   
     return (
         <main>
-            {/* rows.length {rows.length} <br/>
-            skip {skip} <br/>
-            limit {skip} <br/>
-            data.todos.length {todos.length} */}
           <Table className="product-table" 
           rows={rows} 
           columns={columns} 
+          stickyHeader={false}
           borderBetweenColumns 
           borderBetweenRows 
           emptyRowsPlaceholder={loading ? <Text>Загрузка...</Text> : <Text>Пусто</Text>}/>

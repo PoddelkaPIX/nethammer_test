@@ -4,6 +4,8 @@ footer{
     padding: 20px;
     border-top: 1px solid rgb(209, 209, 209);
     align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
     .select-limit{
         width: 220px;
         white-space: nowrap

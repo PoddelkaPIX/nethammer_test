@@ -40,12 +40,12 @@ export const todoSlice = createSlice({
         setFilter: (state, action: PayloadAction<string>) => {
             state.filter = action.payload
         },
-        setLoading: (state) => {
+        startLoading: (state) => {
             state.loading = true
         }
     }
 })
 
-export const {addTodos, setFilter, setLoading,  setTotal, setLimit, clearTodos} = todoSlice.actions
+export const {addTodos, setFilter, startLoading,  setTotal, setLimit, clearTodos} = todoSlice.actions
 export default todoSlice.reducer
 

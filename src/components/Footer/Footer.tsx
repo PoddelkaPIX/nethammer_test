@@ -3,7 +3,7 @@ import { Select } from '@consta/uikit/Select';
 import { Button } from '@consta/uikit/Button';
 import "./Footer.scss"
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { clearTodos, setLimit, setLoading } from "../../store/slices/todoSlice/todoSlice";
+import { clearTodos, setLimit, startLoading } from "../../store/slices/todoSlice/todoSlice";
 
 
 type Item = {
@@ -41,7 +41,7 @@ export const Footer: FC = () => {
   return (
     <footer>
         <label>Показано {todos.length} из {total}</label>
-        <Button className="show-more-todos-btn" label={"Показать ещё "+value.label} onlyIcon view='secondary' onClick={()=>{dispatch(setLoading()); dispatch(setLimit(Number(value.label)))}}/>
+        <Button className="show-more-todos-btn" label={"Показать ещё "+value.label} onlyIcon view='secondary' onClick={()=>{dispatch(startLoading()); dispatch(setLimit(Number(value.label)))}}/>
         <Select
             className="select-limit"
             labelPosition="left"

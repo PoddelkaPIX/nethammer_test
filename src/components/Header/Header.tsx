@@ -15,11 +15,12 @@ export const Header: FC = () => {
     const dispatch = useAppDispatch()
     const [value, setValue] = useState<string>("");
     const handleChange = ({ value }: { value: string | null}) => {value ? setValue(value): setValue("")}
-    let debounced: string = ""
-    debounced = useDebounce(value)
+    let debounced: string = useDebounce(value)
+
     useEffect(()=>{
         dispatch(setFilter(value))
     }, [debounced])
+
     return (
         <header>
             <Text size="xl">Список задач</Text>

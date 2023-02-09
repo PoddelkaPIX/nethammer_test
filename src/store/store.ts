@@ -1,10 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import { useDispatch } from "react-redux"
 import { rootReducer } from "./root-reducer"
 import { todoApi } from "./slices/todoSlice/todoApi"
-import logger from 'redux-logger'
-
 
 const store = configureStore({
     reducer: rootReducer,

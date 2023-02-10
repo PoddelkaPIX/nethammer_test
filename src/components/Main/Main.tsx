@@ -6,11 +6,11 @@ import { addTodos, setTotal } from "../../store/slices/todoSlice/todoSlice"
 import { Text } from '@consta/uikit/Text';
 import { ITodo } from "../../store/slices/todoSlice/todoTypes"
 import "./Main.scss"
+
 type Row = TableRow & {
     todo: string
     completed: string
   };
-
 
 const columns: TableColumn<Row>[] = [
   {

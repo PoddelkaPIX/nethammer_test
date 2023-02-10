@@ -2,11 +2,10 @@ import { Table, TableColumn, TableRow } from "@consta/uikit/Table"
 import { FC, useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import {todoApi} from "../../store/slices/todoSlice/todoApi"
-import { addTodos, setTotal } from "../../store/slices/todoSlice/todoSlice"
+import { addTodos, clearTodos, setTotal } from "../../store/slices/todoSlice/todoSlice"
 import { Text } from '@consta/uikit/Text';
 import { ITodo } from "../../store/slices/todoSlice/todoTypes"
 import "./Main.scss"
-
 type Row = TableRow & {
     todo: string
     completed: string
@@ -41,9 +40,10 @@ export const Main: FC = () => {
     let limit = useAppSelector((state)=> state.todos.limit)
     let filter = useAppSelector((state)=> state.todos.filter)
     let total = useAppSelector((state)=> state.todos.total)
+    let skip = useAppSelector((state)=> state.todos.skip)
     let loading = useAppSelector((state)=> state.todos.loading)
 
-    const {data} = todoApi.useGetTodosQuery({limit, skip: todos.length}, {
+    const {data} = todoApi.useGetTodosQuery({limit, skip}, {
         skip: loading === false
     })
     
@@ -62,17 +62,21 @@ export const Main: FC = () => {
         setRows(newRows)
     }, [todos, filter])
 
+    // Реакция на получение новых данных
     useEffect(()=>{
-        if (data){
-            let newTodos: ITodo[] = []
-            for (let todo of data.todos){
-                newTodos.push(todo)
-            }
-            dispatch(addTodos(newTodos))
-            if (data.total !== total){
-                dispatch(setTotal(data.total))
-            }
-        }
+      if (skip < todos.length){
+        dispatch(clearTodos())
+      }
+      if (data){
+          let newTodos: ITodo[] = []
+          for (let todo of data.todos){
+              newTodos.push(todo)
+          }
+          dispatch(addTodos(newTodos))
+          if (data.total !== total){
+              dispatch(setTotal(data.total))
+          }
+      }
     }, [data])
   
     return (

@@ -36,6 +36,7 @@ export const Footer: FC = () => {
   function handlerShowMoreBtn(){
     dispatch(startLoading())
   }
+  
   function handlerSelectLimit(value: Item | null){
     if (value){
       dispatch(setLimit(Number(value.label)))

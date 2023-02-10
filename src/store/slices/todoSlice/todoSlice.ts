@@ -5,6 +5,7 @@ import { ITodo } from "./todoTypes";
 type todoState = {
     total: number,
     limit: number,
+    skip: number,
     filter: string
     list: ITodo[],
     loading: boolean
@@ -13,6 +14,7 @@ type todoState = {
 const initialState: todoState = {
     total: 0,
     limit: 10,
+    skip: 0,
     filter: "",
     list: [],
     loading: true
@@ -26,6 +28,7 @@ export const todoSlice = createSlice({
             for (let todo of action.payload){
                 state.list.push(todo)
             }
+            state.skip = state.list.length
             state.loading = false
         }, 
         setTotal: (state, action: PayloadAction<number>) =>  {
@@ -37,6 +40,9 @@ export const todoSlice = createSlice({
         setLimit: (state, action: PayloadAction<number>) => {
             state.limit = action.payload
         },
+        setSkip: (state, action: PayloadAction<number>) => {
+            state.skip = action.payload
+        },
         setFilter: (state, action: PayloadAction<string>) => {
             state.filter = action.payload
         },
@@ -46,6 +52,6 @@ export const todoSlice = createSlice({
     }
 })
 
-export const {addTodos, setFilter, startLoading,  setTotal, setLimit, clearTodos} = todoSlice.actions
+export const {addTodos, setFilter, startLoading,  setTotal, setLimit, setSkip, clearTodos} = todoSlice.actions
 export default todoSlice.reducer
 
